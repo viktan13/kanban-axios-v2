@@ -1,36 +1,33 @@
-import React, { useState } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import React from 'react';
 
 function DeleteTaskModal(props) {
-    const {task, toggle, modal} = props;
+    const {task} = props;
 
 
     function onDelete() {
-        props.deleteTask(props.task._id);
-        toggle();
+        props.deleteTask(task._id);
     }
 
     return (
-        <>
 
-            <Modal isOpen={modal} toggle={toggle} {...props}>
-                <ModalHeader toggle={toggle}>Delete Task</ModalHeader>
-                <ModalBody>
-                    Are you sure you want to delete task: <b>"{task.name}"</b>?
-                </ModalBody>
-                <ModalFooter>
-                    <Button
-                        color="primary"
-                        onClick={onDelete}
-                    >
-                        Delete
-                    </Button>{' '}
-                    <Button color="secondary" onClick={toggle}>
-                        Cancel
-                    </Button>
-                </ModalFooter>
-            </Modal>
-        </>
+            <div class="modal fade" id={task._id} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Delete task</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to delete task: <b>{task.name}</b>?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onClick={onDelete}>Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
     );
 }
 

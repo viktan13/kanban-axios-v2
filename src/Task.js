@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import DeleteTaskModal from "./DeleteTaskModal";
-import {Button} from "reactstrap";
 
 const Task = (props) => {
 
@@ -21,13 +20,13 @@ const Task = (props) => {
                 <li className="list-group-item">{props.task.priority}
                     <button
                         type='button'
-                        className="btn btn-secondary btn-sm"
+                        className="btn btn-outline-secondary btn-sm"
                         onClick={() => props.changePriority(props.task._id, +props.task.priority + 1)}
                         disabled={+props.task.priority === props.priorities[props.priorities.length - 1]}
                     >↑</button>
                     <button
                         type='button'
-                        className="btn btn-secondary btn-sm"
+                        className="btn btn-outline-secondary btn-sm"
                         onClick={() => props.changePriority(props.task._id, +props.task.priority - 1)}
                         disabled={+props.task.priority === props.priorities[0]}
                     >↓</button>
@@ -45,9 +44,9 @@ const Task = (props) => {
                     disabled={props.task.status === props.statuses[0]}
                 >←  </button>
                 <button type='button' className="btn btn-outline-primary">Update</button>
-                <Button color="outline-danger"  onClick={toggle}>
+                <button type="button" className="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target={`#${props.task._id}`}>
                     Delete
-                </Button>
+                </button>
                 <DeleteTaskModal
                     task={props.task}
                     modal={modal}
