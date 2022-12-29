@@ -2,6 +2,7 @@ import axios from 'axios'
 import {useEffect, useState} from "react";
 import Column from "./Column";
 import "bootstrap/dist/css/bootstrap.css";
+import CreateTaskModal from "./CreateTaskModal";
 
 function App() {
   const [statuses, setStatuses] = useState([]);
@@ -36,8 +37,8 @@ function App() {
         })
   }
 
-  function addTask(){
-    axios.post(`https://expressjs-server.up.railway.app/tasks`, {name: 'Hello', description:'greet', priority: 5, status:'todo'})
+  function addTask(newTask){
+    axios.post(`https://expressjs-server.up.railway.app/tasks`, newTask)
         .then(response=>{
           getTasks()
         })
@@ -91,7 +92,11 @@ function App() {
 
         <div className="container text-center">
 
-          <button onClick={addTask}>Create task</button>
+          <CreateTaskModal
+              addTask={addTask}
+              statuses={statuses}
+              priorities={priorities}
+          />
 
           <div className="row align-items-start">
             {statuses.map(status=> <Column
