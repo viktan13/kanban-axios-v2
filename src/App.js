@@ -7,7 +7,7 @@ import CreateTaskModal from "./CreateTaskModal";
 function App() {
   const [statuses, setStatuses] = useState([]);
   const [tasks, setTasks] = useState([]);
-  const [priorities, setPriorities] = useState(Array.from({length: 10}, (_, i) => i + 1));
+  const [priorities,] = useState(Array.from({length: 10}, (_, i) => i + 1));
 
   function getStatuses(){
     axios.get('https://expressjs-server.up.railway.app/statuses')
@@ -27,8 +27,8 @@ function App() {
     })
   }
 
-  function updateTask(id){
-    axios.patch(`https://expressjs-server.up.railway.app/tasks/${id}`, {name: 'Hello'})
+  function updateTask(id, newTask){
+    axios.patch(`https://expressjs-server.up.railway.app/tasks/${id}`, newTask)
         .then(response=>{
           getTasks()
         })
@@ -108,6 +108,7 @@ function App() {
                 moveTask={moveTask}
                 statuses={statuses.map(el => el.title)}
                 deleteTask={deleteTask}
+                updateTask={updateTask}
             />)}
 
           </div>

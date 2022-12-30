@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import DeleteTaskModal from "./DeleteTaskModal";
 import UpdateTaskModal from "./UpdateTaskModal";
 
@@ -66,7 +66,9 @@ const Task = (props) => {
 
                 <UpdateTaskModal
                     task={props.task}
-
+                    priorities={props.priorities}
+                    statuses={props.statuses}
+                    updateTask={props.updateTask}
                 />
             </div>
         </div>

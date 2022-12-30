@@ -14,6 +14,7 @@ const Column = (props) => {
                 moveTask={props.moveTask}
                 statuses={props.statuses}
                 deleteTask={props.deleteTask}
+                updateTask={props.updateTask}
             />)}
         </div>
     );
