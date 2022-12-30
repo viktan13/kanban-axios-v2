@@ -1,13 +1,8 @@
 import React, {useState} from 'react';
 import DeleteTaskModal from "./DeleteTaskModal";
+import UpdateTaskModal from "./UpdateTaskModal";
 
 const Task = (props) => {
-
-    const [modal, setModal] = useState(false);
-
-    const toggle = () => setModal(!modal);
-
-
 
     return (
         <div className="card mb-3">
@@ -43,14 +38,22 @@ const Task = (props) => {
                     onClick={() => props.moveTask(props.task._id, props.task.status, -1)}
                     disabled={props.task.status === props.statuses[0]}
                 >←  </button>
-                <button type='button' className="btn btn-outline-primary">Update</button>
-                <button type="button" className="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target={`#${props.task._id}`}>
+                <button
+                    type='button'
+                    className="btn btn-outline-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target={`#update${props.task._id}`}
+                >Update</button>
+                <button
+                    type="button"
+                    className="btn btn-outline-danger"
+                    data-bs-toggle="modal"
+                    data-bs-target={`#delete${props.task._id}`}
+                >
                     Delete
                 </button>
                 <DeleteTaskModal
                     task={props.task}
-                    modal={modal}
-                    toggle={toggle}
                     deleteTask={props.deleteTask}
                 />
 
@@ -61,6 +64,10 @@ const Task = (props) => {
                     disabled={props.task.status === props.statuses[props.statuses.length - 1]}
                 >→</button>
 
+                <UpdateTaskModal
+                    task={props.task}
+
+                />
             </div>
         </div>
 

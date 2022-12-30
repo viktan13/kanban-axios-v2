@@ -10,7 +10,7 @@ function DeleteTaskModal(props) {
 
     return (
 
-            <div className="modal fade" id={task._id} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal fade" id={`delete${task._id}`} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
