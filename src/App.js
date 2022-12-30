@@ -4,13 +4,14 @@ import Column from "./Column";
 import "bootstrap/dist/css/bootstrap.css";
 import CreateTaskModal from "./CreateTaskModal";
 
+
 function App() {
   const [statuses, setStatuses] = useState([]);
   const [tasks, setTasks] = useState([]);
   const [priorities,] = useState(Array.from({length: 10}, (_, i) => i + 1));
 
   function getStatuses(){
-    axios.get('https://expressjs-server.up.railway.app/statuses')
+    axios.get(process.env.REACT_APP_API_URL_STATUSES)
         .then(response=>{
           setStatuses(response.data)
         }).catch(error => {
@@ -19,7 +20,7 @@ function App() {
   }
 
   function getTasks(){
-    axios.get('https://expressjs-server.up.railway.app/tasks')
+    axios.get(process.env.REACT_APP_API_URL_TASK)
         .then(response=>{
           setTasks(response.data)
         }).catch(error => {
@@ -28,7 +29,7 @@ function App() {
   }
 
   function updateTask(id, newTask){
-    axios.patch(`https://expressjs-server.up.railway.app/tasks/${id}`, newTask)
+    axios.patch(`${process.env.REACT_APP_API_URL_TASK}/${id}`, newTask)
         .then(response=>{
           getTasks()
         })
@@ -38,7 +39,7 @@ function App() {
   }
 
   function addTask(newTask){
-    axios.post(`https://expressjs-server.up.railway.app/tasks`, newTask)
+    axios.post(process.env.REACT_APP_API_URL_TASK, newTask)
         .then(response=>{
           getTasks()
         })
@@ -48,7 +49,7 @@ function App() {
   }
 
   function changePriority(id, priority) {
-      axios.patch(`https://expressjs-server.up.railway.app/tasks/${id}`, {priority})
+      axios.patch(`${process.env.REACT_APP_API_URL_TASK}/${id}`, {priority})
           .then(response => {
               getTasks();
           })
@@ -61,7 +62,7 @@ function App() {
       const statArray = statuses.map(el => el.title);
       const currentIndex = statArray.indexOf(status);
       const newStatus = statArray[currentIndex + direction]
-      axios.patch(`https://expressjs-server.up.railway.app/tasks/${id}`, {status: newStatus})
+      axios.patch(`${process.env.REACT_APP_API_URL_TASK}/${id}`, {status: newStatus})
           .then(response => {
               getTasks();
           })
@@ -71,7 +72,7 @@ function App() {
   }
 
   function deleteTask(id) {
-      axios.delete(`https://expressjs-server.up.railway.app/tasks/${id}`)
+      axios.delete(`${process.env.REACT_APP_API_URL_TASK}/${id}`)
           .then(() => {
               getTasks();
           })
